@@ -1,10 +1,10 @@
 package com.lance.code.generation.common;
 
 public interface ConfigConstants {
-	/**定义Schema*/
-	String SCHEMA = "web-system";
+	/**定义Schema,schema 就是数据库名*/
+	String SCHEMA = "renren_security";
 	
-	/**移除表前缀*/
+	/**移除表前缀，最对满足前缀条件的表生成*/
 	String REMOVE_TABLE_PREFIX = "t_";
 	
 	/**Domain后缀, CustomerInfo*/
@@ -20,7 +20,7 @@ public interface ConfigConstants {
 	String SQL_MAPPER_SUFFIX = "-mapper";
 	
 	/**生成包名称*/
-	String ROOT_PACKAGE = "com.lance";
+	String ROOT_PACKAGE = "com.arthas";
 	
 	/**JavaBean包名称*/
 	String DOMAIN_PACKAGE = "domain";

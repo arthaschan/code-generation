@@ -354,6 +354,10 @@ public class JavaBeanHandler {
 	 */
 	public static String domainClassName(String className){
 		className = StringUtils.substringAfter(className, ConfigConstants.REMOVE_TABLE_PREFIX);
+
+		// REMOVE_TABLE_PREFIX 相当于过滤表，只取 表名有此前缀的。
+		if(StringUtils.isEmpty(className))
+			return className;
 		String[] _names = StringUtils.split(className, "_");
 		
 		StringBuilder builder = new StringBuilder();

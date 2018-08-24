@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +54,15 @@ public class TableServiceImpl implements TableService {
 		
 		//创建Domain
 		String domain = JavaBeanHandler.createDomain(info, columns);
-		writeFile(JavaBeanHandler.domainPath(), JavaBeanHandler.domainClassName(info.getTableName())+".java", domain);
+		String domainClassName=JavaBeanHandler.domainClassName(info.getTableName());
+		// 只对满足表名前缀要求的表进行生成。如果前缀为空，则生成全部。
+		if(StringUtils.isEmpty(domainClassName))
+			return ;
+		writeFile(JavaBeanHandler.domainPath(), domainClassName+".java", domain);
 		
 		//创建Mapper
 		String mapper = JavaBeanHandler.createMapper(info);
+
 		writeFile(JavaBeanHandler.mapperPath(), JavaBeanHandler.className(info.getTableName(), ConfigConstants.MAPPER_PACKAGE)+".java", mapper);
 		
 		//创建Mapper.xml
